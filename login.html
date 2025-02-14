@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Prabhat Singh">
+    <meta name="description" content="Registration Page using Angular Js.">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="main.css">
+    <title>Login-Signup</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div class="box">
+        <img src="user.jpg" alt="user_jpg" class="avatar">
+        <form name="signupform" novalidate autocomplete="off" ng-submit="login()">
+            <h1 ng-show="showlogin">Login</h1>
+            <h1 ng-show="showsignup">Sign Up</h1>
+
+            <div class="textfield">
+                <i class="fa fa-user" style="color: aliceblue;"></i>
+                <input type="text" class="textfield-input" name="username" ng-model="username" required>
+                <label for="username">Username</label>
+                <div class="indicator"></div>
+                <span class="error" ng-show="signupform.username.$touched && signupform.username.$error.required">
+                    <i class="fa fa-exclamation-circle"></i> Username Required
+                </span>
+            </div>
+
+            <div class="textfield">
+                <i class="fa fa-key" style="color: aliceblue;"></i>
+                <input type="password" class="textfield-input" name="password" ng-model="password" required>
+                <label for="password">Password</label>
+                <div class="indicator"></div>
+                <span class="error" ng-show="signupform.password.$touched && signupform.password.$error.required">
+                    <i class="fa fa-exclamation-circle"></i> Password Required
+                </span>
+                <i class="fa" ng-class="passwordType === 'password' ? 'fa-eye' : 'fa-eye-slash'" ng-click="togglePasswordVisibility()" 
+                    style="position: absolute; right: 5px; top: 23%; transform: translateY(-100%); cursor: pointer; color: aliceblue;">
+                </i>
+            </div>
+
+            <div class="textfield" ng-show="showsignup">
+                <i class="fa fa-check" style="color: aliceblue;"></i>
+                <input type="password" class="textfield-input" name="cpassword" ng-model="cpassword" required>
+                <label for="cpassword">Confirm Password</label>
+                <div class="indicator"></div>
+                <span class="error" ng-show="signupform.cpassword.$touched && signupform.cpassword.$error.required">
+                    <i class="fa fa-exclamation-circle"></i> Confirm Password Required
+                </span>
+                <span class="error" ng-show="cpassword && password !== cpassword">
+                    <i class="fa fa-exclamation-circle"></i> Your Password Must Match
+                </span>
+            </div>
+            
+            <div class="logindiv">
+                <button type="submit" name="submit" class="loginbtn">
+                    <span class="lspan"></span>
+                    <span class="lspan"></span>
+                    <span class="lspan"></span>
+                    <span class="lspan"></span>
+                    {{ btnName }}
+                </button>
+            </div>
+
+            <p class="account" ng-show="showsignup">Already have an account?
+                <span><a ng-click="loginpage()"> Login </a></span>
+            </p>
+            <p class="account" ng-show="showlogin">New User?
+                <span><a ng-click="signuppage()"> Create an Account </a></span>
+            </p>
+        </form>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
